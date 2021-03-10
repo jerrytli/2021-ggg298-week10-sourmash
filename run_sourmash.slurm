@@ -1,0 +1,35 @@
+#!/bin/bash -login
+#SBATCH -p high2                      # partition, or queue, to assign to
+#SBATCH -J ggg298-assembly          # name for job
+#SBATCH -o assembly_megahit.j%j.out # file to write STDOUT to
+#SBATCH -e assembly_megahit.j%j.err # file to write error output to
+#SBATCH -N 1                        # one "node", or computer
+#SBATCH -n 1                        # one task for this node
+#SBATCH -c 8                        # eight cores per task
+#SBATCH -t 0:30:00                  # ask for no more than 30 minutes
+#SBATCH --mem=2gb                  # ask for no more than 10 GB of memory
+
+# initialize conda
+. ~/miniconda3/etc/profile.d/conda.sh
+
+# activate your desired conda environment
+conda activate smash
+
+# go to the directory you ran 'sbatch' in, OR just hardcode it...
+#cd $SLURM_SUBMIT_DIR
+cd ~/298lab10/2021-ggg298-week10-sourmash
+
+# fail on weird errors
+set -o nounset
+set -o errexit
+set -x
+
+# run the snakemake!
+snakemake -j 1 
+
+# print out various information about the job
+env | grep SLURM            # Print out values of the current jobs SLURM environment variables
+
+scontrol show job ${SLURM_JOB_ID}     # Print out final statistics about resource uses before job exits
+
+sstat --format 'JobID,MaxRSS,AveCPU' -P ${SLURM_JOB_ID}.batch

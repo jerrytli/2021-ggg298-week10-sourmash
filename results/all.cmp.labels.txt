@@ -1,0 +1,5 @@
+raw_data/1.fa.gz
+raw_data/2.fa.gz
+raw_data/3.fa.gz
+raw_data/4.fa.gz
+raw_data/5.fa.gz
