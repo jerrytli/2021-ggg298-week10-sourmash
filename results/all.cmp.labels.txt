@@ -3,3 +3,9 @@ raw_data/2.fa.gz
 raw_data/3.fa.gz
 raw_data/4.fa.gz
 raw_data/5.fa.gz
+raw_data/6.fa.gz
+raw_data/7.fa.gz
+raw_data/8.fa.gz
+raw_data/9.fa.gz
+raw_data/10.fa.gz
+raw_data/11.fa.gz
